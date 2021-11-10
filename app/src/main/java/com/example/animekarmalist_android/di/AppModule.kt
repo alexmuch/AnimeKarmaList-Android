@@ -17,13 +17,15 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideAnimeKarmaListRepository(
-        api: AnimeKarmaListApi
-    ) = ProdRepository(api)
+    fun provideAnimeKarmaListRepository(api: AnimeKarmaListApi) = ProdRepository(api)
+
+//    @Singleton
+//    @Provides
+//    fun provideAnimeKarmaListTestRepository() = TestRepository()
 
     @Singleton
     @Provides
-    fun providePokeApi(): AnimeKarmaListApi {
+    fun provideAnimeKarmaListApi(): AnimeKarmaListApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)

@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animekarmalist_android.repository.ProdRepository
+import com.example.animekarmalist_android.repository.Repository
+//import com.example.animekarmalist_android.repository.TestRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class WeeklyListViewModel @Inject constructor(
@@ -17,7 +20,6 @@ class WeeklyListViewModel @Inject constructor(
     }
 
     fun testApi() {
-        print("api clicked")
         Log.d("TAG", "api clicked")
 
         viewModelScope.launch {
