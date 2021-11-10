@@ -13,7 +13,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class WeeklyListViewModel @Inject constructor(
-    @Named("TestImplementation") private val repository: Repository
+    @Named("ProdImplementation") private val repository: Repository
 ) : ViewModel() {
 
     init {

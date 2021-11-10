@@ -3,9 +3,7 @@ package com.example.animekarmalist_android.repository
 import com.example.animekarmalist_android.data.remote.responses.AnimeItemsList
 import com.example.animekarmalist_android.data.remote.responses.AnimeListItem
 import com.example.animekarmalist_android.util.Resource
-import dagger.hilt.android.scopes.ActivityScoped
 
-@ActivityScoped
 class TestRepository: Repository {
     private val dummyResponse: AnimeItemsList = AnimeItemsList()
 
