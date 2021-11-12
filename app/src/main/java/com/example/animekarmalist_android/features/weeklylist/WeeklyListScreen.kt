@@ -62,13 +62,7 @@ fun CardView(
     navController: NavController,
     animeItem: AnimeItem,
 ) {
-    var resourceId = R.drawable.aquacrying
-    
-    val idFromSearch = R.drawable::class.java.getId("toyoureternity")
-    
-    if (idFromSearch != -1) {
-        resourceId = idFromSearch
-    }
+    var imageResourceId = getImageResourceId(animeItem.imagePath)
     
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -76,7 +70,7 @@ fun CardView(
     ) {
         Box(modifier = Modifier.height(88.dp)) {
             Image(
-                painter = painterResource(id = resourceId),
+                painter = painterResource(id = imageResourceId),
                 contentDescription = "Content description for visually impaired!",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillHeight
@@ -94,12 +88,29 @@ fun CardView(
     }
 }
 
+
+// input from API looks like`/2020fall/s1kaguya.webp`
+// returns the Android resource ID for an image
+fun getImageResourceId(imageUrl: String): Int {
+    // extract `s1kaguya`
+    val name = imageUrl.substringBeforeLast(".").substringAfterLast("/")
+
+    // determine resource ID from name using reflection
+    val idFromSearch = R.drawable::class.java.getId(name)
+    if (idFromSearch == -1) {
+        // if not found in resources, use placeholder
+        return R.drawable.aquacrying
+    }
+
+    return idFromSearch
+}
+
+// from https://stackoverflow.com/a/55465964/2619824
 inline fun <reified T: Class<*>> T.getId(resourceName: String): Int {
     try {
         val idField = getDeclaredField (resourceName)
         return idField.getInt(idField)
     } catch (e:Exception) {
-        //e.printStackTrace()
         println("Could not find a valid image")
         return -1
     }
