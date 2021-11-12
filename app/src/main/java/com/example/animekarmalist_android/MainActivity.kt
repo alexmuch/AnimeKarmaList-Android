@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                             it.arguments?.getString("name")
                         }
 
-                        DetailView(name)
+                        DetailView(navController = navController, name)
                     }
                 }
 
