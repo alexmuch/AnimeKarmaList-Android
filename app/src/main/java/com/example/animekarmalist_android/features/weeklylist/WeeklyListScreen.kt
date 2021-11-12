@@ -1,6 +1,7 @@
 package com.example.animekarmalist_android.features.weeklylist
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -52,7 +54,15 @@ fun AnimeList(
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         items(weekItems) { item ->
-            CardView(navController, item)
+            Box(
+                modifier = Modifier.clickable {
+                    navController.navigate(
+                        "item_detail_screen/${item.name}"
+                    )
+                }
+            ) {
+                CardView(navController, item)
+            }
         }
     }
 }
