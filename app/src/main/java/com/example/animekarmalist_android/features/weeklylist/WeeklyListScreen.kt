@@ -62,7 +62,7 @@ fun CardView(
     navController: NavController,
     animeItem: AnimeItem,
 ) {
-    var imageResourceId = getImageResourceId(animeItem.imagePath)
+    val imageResourceId = getImageResourceId(animeItem.imagePath)
     
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -79,10 +79,32 @@ fun CardView(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(12.dp),
+                    .padding(1.dp),
                 contentAlignment = Alignment.TopEnd
             ) {
-                Text("Blah blah blah", style = TextStyle(color = Color.Black, fontSize = 20.sp))
+                Text(animeItem.name, style = TextStyle(color = Color.Black, fontSize = 20.sp))
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(1.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Text("${animeItem.karma}", style = TextStyle(color = Color.Black, fontSize = 30.sp))
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(1.dp),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                if (animeItem.episodeTotal != null && animeItem.episodeNumber <= animeItem.episodeTotal) {
+                    Text("Episode ${animeItem.episodeNumber}/${animeItem.episodeTotal}", style = TextStyle(color = Color.Black, fontSize = 15.sp))
+                } else {
+                    Text("Episode ${animeItem.episodeNumber}", style = TextStyle(color = Color.Black, fontSize = 15.sp))
+                }
             }
         }
     }
