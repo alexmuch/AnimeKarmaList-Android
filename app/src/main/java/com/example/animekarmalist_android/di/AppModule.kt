@@ -1,6 +1,7 @@
 package com.example.animekarmalist_android.di
 
 import com.example.animekarmalist_android.data.remote.AnimeKarmaListApi
+import com.example.animekarmalist_android.features.weeklylist.WeeklyListViewModel
 import com.example.animekarmalist_android.repository.ProdRepository
 import com.example.animekarmalist_android.repository.Repository
 import com.example.animekarmalist_android.repository.TestRepository

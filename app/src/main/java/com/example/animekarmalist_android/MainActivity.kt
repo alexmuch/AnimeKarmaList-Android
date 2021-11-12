@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "weekly_list_screen") {
                     composable("weekly_list_screen") {
-                        WeeklyListScreen()
+                        WeeklyListScreen(navController = navController)
                     }
                 }
 

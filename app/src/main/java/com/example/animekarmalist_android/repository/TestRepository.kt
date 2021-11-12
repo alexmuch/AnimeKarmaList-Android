@@ -1,13 +1,13 @@
 package com.example.animekarmalist_android.repository
 
 import com.example.animekarmalist_android.data.remote.responses.AnimeItemsList
-import com.example.animekarmalist_android.data.remote.responses.AnimeListItem
+import com.example.animekarmalist_android.data.remote.responses.AnimeItem
 import com.example.animekarmalist_android.util.Resource
 
 class TestRepository: Repository {
     private val dummyResponse: AnimeItemsList = AnimeItemsList()
 
-    private val item = AnimeListItem(
+    private val item = AnimeItem(
         _id = "1q2w3e4r",
         postId="af8o9s",
         name= "Kaguya-sama: Love is War",
@@ -34,7 +34,7 @@ class TestRepository: Repository {
         rankChange="+"
     )
 
-    private val item2 = AnimeListItem(
+    private val item2 = AnimeItem(
         _id = "9z2w3eyv",
         postId="nilvi3",
         name= "JUJUTSU KAISEN",
@@ -61,7 +61,7 @@ class TestRepository: Repository {
         rankChange="+"
     )
 
-    private val item3 = AnimeListItem(
+    private val item3 = AnimeItem(
         _id = "9z2w3eyv",
         postId="nekvs8",
         name= "To Your Eternity",
@@ -88,7 +88,7 @@ class TestRepository: Repository {
         rankChange="+"
     )
 
-    private val item4 = AnimeListItem(
+    private val item4 = AnimeItem(
         _id = "9z2w3eyv",
         postId="nilvi2",
         name= "Vivy -Fluorite Eye's Song-",

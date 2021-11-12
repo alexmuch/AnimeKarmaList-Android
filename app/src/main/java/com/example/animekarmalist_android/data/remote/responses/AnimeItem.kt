@@ -1,6 +1,6 @@
 package com.example.animekarmalist_android.data.remote.responses
 
-data class AnimeListItem(
+data class AnimeItem(
     val _id: String,
     val anilistId: Int,
     val anilistScore: String,
