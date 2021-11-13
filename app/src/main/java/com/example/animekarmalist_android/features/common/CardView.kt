@@ -1,6 +1,7 @@
 package com.example.animekarmalist_android.features.common
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -61,7 +62,9 @@ fun CardView(
                         "${item.karma}",
                         color = Color.White,
                         fontSize = 35.sp,
-                        style = textShadow
+                        style = textShadow,
+                        modifier = Modifier
+                            .padding(start = 4.dp)
                     )
                 }
 
@@ -74,7 +77,9 @@ fun CardView(
                         item.name,
                         color = Color.White,
                         fontSize = 20.sp,
-                        style = textShadow
+                        style = textShadow,
+                        modifier = Modifier
+                          .padding(end = 5.dp)
                     )
 
                     Spacer(modifier = Modifier.weight(1.0f))
@@ -83,7 +88,9 @@ fun CardView(
                         text = episodeInfo,
                         color = Color.White,
                         fontSize = 15.sp,
-                        style = textShadow
+                        style = textShadow,
+                        modifier = Modifier
+                            .padding(bottom = 2.dp, end = 5.dp)
                     )
                 }
             }
