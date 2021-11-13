@@ -21,10 +21,19 @@ import com.example.animekarmalist_android.data.remote.responses.AnimeItem
 
 @Composable
 fun CardView(
-    item: AnimeItem,
+    item: AnimeItem
 ) {
     val imageResourceId = getImageResourceId(item.imagePath)
     val episodeInfo = formatEpisodeInfo(item)
+    val textShadow = MaterialTheme.typography.h4.copy(
+        color = Color.White,
+        fontSize = 35.sp,
+        shadow = Shadow(
+            color = Color.Black,
+            offset = Offset(2f, 2f),
+            blurRadius = 4f
+        )
+    )
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -50,15 +59,9 @@ fun CardView(
 
                     Text(
                         "${item.karma}",
-                        style = MaterialTheme.typography.h4.copy(
-                            color = Color.White,
-                            fontSize = 35.sp,
-                            shadow = Shadow(
-                                color = Color.Black,
-                                offset = Offset(2f, 2f),
-                                blurRadius = 4f
-                            )
-                        )
+                        color = Color.White,
+                        fontSize = 35.sp,
+                        style = textShadow
                     )
                 }
 
@@ -71,13 +74,7 @@ fun CardView(
                         item.name,
                         color = Color.White,
                         fontSize = 20.sp,
-                        style = MaterialTheme.typography.h4.copy(
-                            shadow = Shadow(
-                                color = Color.Black,
-                                offset = Offset(2f, 2f),
-                                blurRadius = 4f
-                            )
-                        )
+                        style = textShadow
                     )
 
                     Spacer(modifier = Modifier.weight(1.0f))
@@ -86,13 +83,7 @@ fun CardView(
                         text = episodeInfo,
                         color = Color.White,
                         fontSize = 15.sp,
-                        style = MaterialTheme.typography.h4.copy(
-                            shadow = Shadow(
-                                color = Color.Black,
-                                offset = Offset(2f, 2f),
-                                blurRadius = 4f
-                            )
-                        )
+                        style = textShadow
                     )
                 }
             }
