@@ -1,6 +1,7 @@
 package com.example.animekarmalist_android.features.weeklylist
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,11 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -70,10 +74,10 @@ fun AnimeList(
 @Composable
 fun CardView(
     navController: NavController,
-    animeItem: AnimeItem,
+    item: AnimeItem,
 ) {
-    val imageResourceId = getImageResourceId(animeItem.imagePath)
-    
+    val imageResourceId = getImageResourceId(item.imagePath)
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(15.dp)
@@ -86,34 +90,77 @@ fun CardView(
                 contentScale = ContentScale.FillHeight
             )
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(1.dp),
-                contentAlignment = Alignment.TopEnd
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(animeItem.name, style = TextStyle(color = Color.Black, fontSize = 20.sp))
-            }
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(.33f)
+                ) {
+                    Spacer(modifier = Modifier.weight(1.0f))
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(1.dp),
-                contentAlignment = Alignment.BottomStart
-            ) {
-                Text("${animeItem.karma}", style = TextStyle(color = Color.Black, fontSize = 30.sp))
-            }
+                    Text(
+                        "${item.karma}",
+                        style = MaterialTheme.typography.h4.copy(
+                            color = Color.White,
+                            fontSize = 35.sp,
+                            shadow = Shadow(
+                                color = Color.Black,
+                                offset = Offset(2f, 2f),
+                                blurRadius = 4f
+                            )
+                        )
+                    )
+                }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(1.dp),
-                contentAlignment = Alignment.BottomEnd
-            ) {
-                if (animeItem.episodeTotal != null && animeItem.episodeNumber <= animeItem.episodeTotal) {
-                    Text("Episode ${animeItem.episodeNumber}/${animeItem.episodeTotal}", style = TextStyle(color = Color.Black, fontSize = 15.sp))
-                } else {
-                    Text("Episode ${animeItem.episodeNumber}", style = TextStyle(color = Color.Black, fontSize = 15.sp))
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Text(
+                        item.name,
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        style = MaterialTheme.typography.h4.copy(
+                            shadow = Shadow(
+                                color = Color.Black,
+                                offset = Offset(2f, 2f),
+                                blurRadius = 4f
+                            )
+                        )
+                    )
+
+                    Spacer(modifier = Modifier.weight(1.0f))
+
+                    if (item.episodeTotal != null && item.episodeNumber <= item.episodeTotal) {
+                        Text(
+                            "Episode ${item.episodeNumber}/${item.episodeTotal}",
+                            color = Color.White,
+                            fontSize = 15.sp,
+                            style = MaterialTheme.typography.h4.copy(
+                                shadow = Shadow(
+                                    color = Color.Black,
+                                    offset = Offset(2f, 2f),
+                                    blurRadius = 4f
+                                )
+                            )
+                        )
+                    } else {
+                        Text(
+                            "Episode ${item.episodeNumber}",
+                            color = Color.White,
+                            fontSize = 15.sp,
+                            style = MaterialTheme.typography.h4.copy(
+                                shadow = Shadow(
+                                    color = Color.Black,
+                                    offset = Offset(2f, 2f),
+                                    blurRadius = 4f
+                                )
+                            )
+                        )
+                    }
                 }
             }
         }
@@ -138,13 +185,13 @@ fun getImageResourceId(imageUrl: String): Int {
 }
 
 // from https://stackoverflow.com/a/55465964/2619824
-inline fun <reified T: Class<*>> T.getId(resourceName: String): Int {
-    try {
-        val idField = getDeclaredField (resourceName)
-        return idField.getInt(idField)
-    } catch (e:Exception) {
-        println("Could not find a valid image")
-        return -1
+inline fun <reified T : Class<*>> T.getId(resourceName: String): Int {
+    return try {
+        val idField = getDeclaredField(resourceName)
+        idField.getInt(idField)
+    } catch (e: Exception) {
+        println("Could not find a valid image in res")
+        -1
     }
 }
 
