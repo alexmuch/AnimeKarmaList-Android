@@ -3,9 +3,6 @@ package com.example.animekarmalist_android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -15,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
-import com.example.animekarmalist_android.features.detail.DetailView
+import com.example.animekarmalist_android.features.common.DetailView
 import com.example.animekarmalist_android.features.weeklylist.WeeklyListScreen
 import com.example.animekarmalist_android.ui.theme.AnimeKarmaListAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.example.animekarmalist_android.features.detail
+package com.example.animekarmalist_android.features.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

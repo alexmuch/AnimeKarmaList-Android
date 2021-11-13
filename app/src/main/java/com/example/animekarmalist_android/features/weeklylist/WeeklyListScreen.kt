@@ -30,6 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.animekarmalist_android.R
 import com.example.animekarmalist_android.data.remote.responses.AnimeItem
+import com.example.animekarmalist_android.features.common.CardView
 
 @Composable
 fun WeeklyListScreen(
@@ -65,135 +66,13 @@ fun AnimeList(
                     )
                 }
             ) {
-                CardView(navController, item)
-            }
-        }
-    }
-}
-
-@Composable
-fun CardView(
-    navController: NavController,
-    item: AnimeItem,
-) {
-    val imageResourceId = getImageResourceId(item.imagePath)
-
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp)
-    ) {
-        Box(modifier = Modifier.height(88.dp)) {
-            Image(
-                painter = painterResource(id = imageResourceId),
-                contentDescription = "Content description for visually impaired!",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.FillHeight
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth(.33f)
-                ) {
-                    Spacer(modifier = Modifier.weight(1.0f))
-
-                    Text(
-                        "${item.karma}",
-                        style = MaterialTheme.typography.h4.copy(
-                            color = Color.White,
-                            fontSize = 35.sp,
-                            shadow = Shadow(
-                                color = Color.Black,
-                                offset = Offset(2f, 2f),
-                                blurRadius = 4f
-                            )
-                        )
-                    )
-                }
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.End
-                ) {
-                    Text(
-                        item.name,
-                        color = Color.White,
-                        fontSize = 20.sp,
-                        style = MaterialTheme.typography.h4.copy(
-                            shadow = Shadow(
-                                color = Color.Black,
-                                offset = Offset(2f, 2f),
-                                blurRadius = 4f
-                            )
-                        )
-                    )
-
-                    Spacer(modifier = Modifier.weight(1.0f))
-
-                    if (item.episodeTotal != null && item.episodeNumber <= item.episodeTotal) {
-                        Text(
-                            "Episode ${item.episodeNumber}/${item.episodeTotal}",
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            style = MaterialTheme.typography.h4.copy(
-                                shadow = Shadow(
-                                    color = Color.Black,
-                                    offset = Offset(2f, 2f),
-                                    blurRadius = 4f
-                                )
-                            )
-                        )
-                    } else {
-                        Text(
-                            "Episode ${item.episodeNumber}",
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            style = MaterialTheme.typography.h4.copy(
-                                shadow = Shadow(
-                                    color = Color.Black,
-                                    offset = Offset(2f, 2f),
-                                    blurRadius = 4f
-                                )
-                            )
-                        )
-                    }
-                }
+                CardView(item)
             }
         }
     }
 }
 
 
-// input from API looks like`/2020fall/s1kaguya.webp`
-// returns the Android resource ID for an image
-fun getImageResourceId(imageUrl: String): Int {
-    // extract `s1kaguya`
-    val name = imageUrl.substringBeforeLast(".").substringAfterLast("/")
-
-    // determine resource ID from name using reflection
-    val idFromSearch = R.drawable::class.java.getId(name)
-    if (idFromSearch == -1) {
-        // if not found in resources, use placeholder
-        return R.drawable.aquacrying
-    }
-
-    return idFromSearch
-}
-
-// from https://stackoverflow.com/a/55465964/2619824
-inline fun <reified T : Class<*>> T.getId(resourceName: String): Int {
-    return try {
-        val idField = getDeclaredField(resourceName)
-        idField.getInt(idField)
-    } catch (e: Exception) {
-        println("Could not find a valid image in res")
-        -1
-    }
-}
 
 
 

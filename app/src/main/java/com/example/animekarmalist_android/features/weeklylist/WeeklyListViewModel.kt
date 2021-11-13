@@ -38,7 +38,7 @@ class WeeklyListViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    Log.d("TAG", "Error calling API")
+                    println("Error calling API")
                 }
             }
         }
