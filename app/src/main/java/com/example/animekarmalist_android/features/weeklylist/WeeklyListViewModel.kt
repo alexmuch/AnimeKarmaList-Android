@@ -25,16 +25,20 @@ class WeeklyListViewModel @Inject constructor(
     }
 
     fun loadListPaginated() {
-        Log.d("TAG", "loading list")
+        println("loading list")
 
         viewModelScope.launch {
             val result = repository.getWeekList("2021-01-08T21:00:00Z", "2021-01-15T23:00:00Z", 0)
 
-            when(result) {
+            when (result) {
                 is Resource.Success -> {
                     weekItems.value += result.data as AnimeItemsList
 
-                    Log.d("TAG", weekItems.value.toString())
+                    println(weekItems.value.toString())
+                }
+
+                is Resource.Loading -> {
+                    //TODO
                 }
 
                 is Resource.Error -> {
