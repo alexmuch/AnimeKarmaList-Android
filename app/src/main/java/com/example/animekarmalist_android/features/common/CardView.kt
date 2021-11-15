@@ -1,6 +1,7 @@
 package com.example.animekarmalist_android.features.common
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
@@ -53,6 +55,8 @@ fun CardView(
                 contentScale = ContentScale.FillHeight
             )
 
+            InternalShadow()
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -84,7 +88,7 @@ fun CardView(
                         fontSize = 20.sp,
                         style = textShadow,
                         modifier = Modifier
-                          .padding(end = 5.dp)
+                            .padding(end = 5.dp)
                     )
 
                     Spacer(modifier = Modifier.weight(1.0f))
@@ -101,6 +105,46 @@ fun CardView(
             }
         }
     }
+}
+
+@Composable
+private fun InternalShadow() {
+    // use internal gradient to darken image for text's visual clarity
+    // left internal shadow
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.linearGradient(
+                    colors = listOf(
+                        Color.Black.copy(alpha = 0.2f),
+                        Color.Transparent,
+                        Color.Transparent,
+                        Color.Transparent,
+                        Color.Transparent
+                    ),
+                    start = Offset(0f, Float.POSITIVE_INFINITY),
+                    end = Offset(Float.POSITIVE_INFINITY, 0f)
+                )
+            )
+    )
+
+    // right internal shadow
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.linearGradient(
+                    colors = listOf(
+                        Color.Transparent,
+                        Color.Transparent,
+                        Color.Black.copy(alpha = 0.3f)
+                    ),
+                    start = Offset(0f, Float.POSITIVE_INFINITY),
+                    end = Offset(Float.POSITIVE_INFINITY, 0f)
+                )
+            )
+    )
 }
 
 fun formatEpisodeInfo(item: AnimeItem): String {
