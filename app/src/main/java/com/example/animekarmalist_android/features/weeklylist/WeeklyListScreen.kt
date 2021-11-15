@@ -39,14 +39,15 @@ fun WeeklyListScreen(
 ) {
     //val weekItems by remember { viewModel.weekItems }
 
-    Surface(color = MaterialTheme.colors.background) {
+    //MaterialTheme.colors.background
+    Surface(color = Color.White) {
 //        Text("ayy lmao")
 //        Button(onClick = { viewModel.loadListPaginated()}) {
 //            Text("test API")
 //        }
-        Column {
+
             AnimeList(navController = navController)
-        }
+
     }
 }
 
@@ -57,10 +58,12 @@ fun AnimeList(
 ) {
     val weekItems by remember { viewModel.weekItems }
 
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
+    LazyColumn(contentPadding = PaddingValues(10.dp)) {
         items(weekItems) { item ->
             Box(
-                modifier = Modifier.clickable {
+                modifier = Modifier
+                    .padding(bottom = 6.dp)
+                    .clickable {
                     navController.navigate(
                         "item_detail_screen/${item.name}"
                     )
