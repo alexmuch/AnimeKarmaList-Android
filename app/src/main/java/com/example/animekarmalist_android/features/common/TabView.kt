@@ -1,6 +1,7 @@
 package com.example.animekarmalist_android.features.common
 
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -11,6 +12,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
@@ -34,7 +36,8 @@ fun TabView(selectedTabIndex: Int, onSelected: (Tab) -> Unit) {
                         contentDescription = thisTab.name,
                         modifier = Modifier.size(29.dp)
                     )
-                }
+                },
+                modifier = Modifier.clip(RoundedCornerShape(20.dp))
             )
         }
     }
