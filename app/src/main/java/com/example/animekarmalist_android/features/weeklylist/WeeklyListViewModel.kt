@@ -1,6 +1,6 @@
 package com.example.animekarmalist_android.features.weeklylist
 
-import android.util.Log
+//import com.example.animekarmalist_android.repository.TestRepository
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,6 @@ import com.example.animekarmalist_android.data.remote.responses.AnimeItem
 import com.example.animekarmalist_android.data.remote.responses.AnimeItemsList
 import com.example.animekarmalist_android.repository.Repository
 import com.example.animekarmalist_android.util.Resource
-//import com.example.animekarmalist_android.repository.TestRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +15,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class WeeklyListViewModel @Inject constructor(
-    @Named("TestImplementation") private val repository: Repository
+    @Named("ProdImplementation") private val repository: Repository
 ) : ViewModel() {
     var weekItems = mutableStateOf<List<AnimeItem>>(listOf())
 

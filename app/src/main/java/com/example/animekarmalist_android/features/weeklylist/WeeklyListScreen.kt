@@ -13,13 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.example.animekarmalist_android.data.remote.responses.AnimeItem
 import com.example.animekarmalist_android.features.common.CardView
 import com.example.animekarmalist_android.features.common.DetailView
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+
+val ROUTE_ITEM_DETAILS = "item-details?item={item}"
 
 @Composable
 fun WeeklyListScreen() {
@@ -29,19 +32,15 @@ fun WeeklyListScreen() {
             AnimeList(navController = navController)
         }
 
-        composable(
-            "item_detail_screen/{name}",
-            arguments = listOf(
-                navArgument("name") {
-                    type = NavType.StringType
-                }
-            )
-        ) {
-            val name = remember {
-                it.arguments?.getString("name")
-            }
+        composable(ROUTE_ITEM_DETAILS) { backStackEntry ->
+            val itemJson = backStackEntry.arguments?.getString("item")
+            val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+            val jsonAdapter = moshi.adapter(AnimeItem::class.java).lenient()
+            val itemObject = jsonAdapter.fromJson(itemJson!!)
 
-            DetailView(navController = navController, name)
+            if (itemObject != null) {
+                DetailView(navController = navController, itemObject)
+            }
         }
     }
 }
@@ -59,8 +58,17 @@ fun AnimeList(
                 modifier = Modifier
                     .padding(bottom = 6.dp)
                     .clickable {
+                        val moshi = Moshi
+                            .Builder()
+                            .addLast(KotlinJsonAdapterFactory())
+                            .build()
+                        val jsonAdapter = moshi
+                            .adapter(AnimeItem::class.java)
+                            .lenient()
+                        val itemJson = jsonAdapter.toJson(item)
+
                         navController.navigate(
-                            "item_detail_screen/${item.name}"
+                            ROUTE_ITEM_DETAILS.replace("{item}", itemJson)
                         )
                     }
             ) {
@@ -69,15 +77,6 @@ fun AnimeList(
         }
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 

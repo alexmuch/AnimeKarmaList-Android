@@ -2,7 +2,6 @@ package com.example.animekarmalist_android.features.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -27,7 +26,7 @@ import com.example.animekarmalist_android.data.remote.responses.AnimeItem
 fun CardView(
     item: AnimeItem
 ) {
-    val imageResourceId = getImageResourceId(item.imagePath)
+    val imageResourceId = getImageResourceId(item.imagePath!!)
     val episodeInfo = formatEpisodeInfo(item)
     val textShadow = MaterialTheme.typography.h4.copy(
         color = Color.White,
@@ -83,7 +82,7 @@ fun CardView(
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        item.name,
+                        item.name!!,
                         color = Color.White,
                         fontSize = 20.sp,
                         style = textShadow,
@@ -148,7 +147,7 @@ private fun InternalShadow() {
 }
 
 fun formatEpisodeInfo(item: AnimeItem): String {
-    if (item.episodeTotal != null && item.episodeNumber <= item.episodeTotal) {
+    if (item.episodeTotal != null && item.episodeNumber!! <= item.episodeTotal) {
         return "Episode ${item.episodeNumber}/${item.episodeTotal}"
     } else {
         return "Episode ${item.episodeNumber}"

@@ -15,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.animekarmalist_android.data.remote.responses.AnimeItem
 
 @Composable
 fun DetailView(
     navController: NavController,
-    name: String?
+    item: AnimeItem
 ) {
     Column {
         Box(
@@ -43,7 +44,7 @@ fun DetailView(
         }
 
         Box() {
-            Text(name!!)
+            Text(item.name!!)
         }
     }
 
