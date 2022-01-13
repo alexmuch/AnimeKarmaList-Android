@@ -15,7 +15,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class WeeklyListViewModel @Inject constructor(
-    @Named("ProdImplementation") private val repository: Repository
+    @Named("TestImplementation") private val repository: Repository
 ) : ViewModel() {
     var weekItems = mutableStateOf<List<AnimeItem>>(listOf())
 
